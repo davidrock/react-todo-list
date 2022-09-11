@@ -1,34 +1,30 @@
+import { PlusCircle } from 'phosphor-react';
 import { useState } from 'react';
-import reactLogo from './assets/react.svg';
-import './App.css';
+import logotipo from './assets/logo.svg';
 
 function App() {
   const [count, setCount] = useState(0);
 
   return (
-    <div className='App'>
-      <div>
-        <a href='https://vitejs.dev' target='_blank'>
-          <img src='/vite.svg' className='logo' alt='Vite logo' />
-        </a>
-        <a href='https://reactjs.org' target='_blank'>
-          <img src={reactLogo} className='logo react' alt='React logo' />
-        </a>
+    <>
+      <div className='bg-gray-600 h-screen w-screen'>
+        <div className='bg-gray-700 w-screen flex flex-col pt-14 pb-20'>
+          <img src={logotipo} alt='Logotipo' className='mx-auto' />
+        </div>
+        <div className='flex flex-row align-center w-8/12 mx-auto px-20'>
+          <div className='grid grid-cols-12 gap-2 w-full -mt-7 h-14'>
+            <input
+              className='bg-gray-400 text-gray-200 placeholder:text-gray-300 rounded-md border border-gray-700 pl-2 col-span-11'
+              type='text'
+              placeholder='Create a new task'
+            />
+            <button className='rounded-md bg-blue hover:bg-blue-dark text-gray-100 w-36 col-span-1'>
+              <span>Criar</span>
+            </button>
+          </div>
+        </div>
       </div>
-      <h1>Vite + React</h1>
-      <div className='card'>
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className='read-the-docs'>
-        Click on the Vite and React logos to learn more
-      </p>
-      <h1 className='text-3xl font-bold underline bg-red-500 text-white'>Hello world!</h1>
-    </div>
+    </>
   );
 }
 
