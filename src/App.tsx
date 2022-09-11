@@ -21,8 +21,16 @@ function App() {
                 type='text'
                 placeholder='Create a new task'
               />
-              <button className='rounded-md bg-blue hover:bg-blue-dark text-gray-100 w-36 active:outline focus-visible:outline outline-blue outline-2'>
+
+              {/* <button
+                type='button'
+                className='w-36 py-2 px-4 flex justify-center items-center bg-blue hover:bg-blue-dark text-gray-100 focus:ring-red-500 focus:ring-offset-red-200 text-white transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-lg '>
+                Upload <PlusCircle size={20} />
+              </button> */}
+
+              <button className='w-30 py-2 px-4 flex justify-center items-center gap-2 rounded-md bg-blue hover:bg-blue-dark text-gray-100 active:outline focus-visible:outline outline-blue outline-2 transition ease-in duration-200 text-center text-base font-semibold'>
                 <span>Criar</span>
+                <PlusCircle size={23} />
               </button>
             </div>
           </div>
