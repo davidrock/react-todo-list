@@ -11,7 +11,25 @@ function App() {
         <div className='bg-gray-700 w-screen flex flex-col pt-14 pb-20'>
           <img src={logotipo} alt='Logotipo' className='mx-auto' />
         </div>
-        <div className='flex flex-row align-center w-8/12 mx-auto px-20'>
+
+        <div className='grid grid-cols-12'>
+          <div className='h-14 col-span-2'></div>
+          <div className='w-full h-14 col-span-8'>
+            <div className='flex flex-row gap-2 justify-center -mt-7'>
+              <input
+                className='bg-gray-400 text-gray-200 placeholder:text-gray-300 rounded-md border border-gray-700 pl-2 h-14 w-full active:outline focus-visible:outline outline-blue outline-2'
+                type='text'
+                placeholder='Create a new task'
+              />
+              <button className='rounded-md bg-blue hover:bg-blue-dark text-gray-100 w-36 active:outline focus-visible:outline outline-blue outline-2'>
+                <span>Criar</span>
+              </button>
+            </div>
+          </div>
+          <div className='h-14 col-span-2'></div>
+        </div>
+
+        {/* <div className='flex flex-row align-center w-8/12 mx-auto px-20'>
           <div className='grid grid-cols-12 gap-2 w-full -mt-7 h-14'>
             <input
               className='bg-gray-400 text-gray-200 placeholder:text-gray-300 rounded-md border border-gray-700 pl-2 col-span-11'
@@ -22,7 +40,7 @@ function App() {
               <span>Criar</span>
             </button>
           </div>
-        </div>
+        </div> */}
       </div>
     </>
   );
