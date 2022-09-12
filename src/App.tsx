@@ -1,4 +1,4 @@
-import { ClipboardText, PlusCircle } from 'phosphor-react';
+import { ClipboardText, PlusCircle, TrashSimple } from 'phosphor-react';
 import {
   ChangeEvent,
   FormEvent,
@@ -88,10 +88,8 @@ function App() {
               {tasks.length >= 0 &&
                 tasks.map((t) => {
                   return (
-                    <div className='flex flex-col gap-1 mt-3 w-full'>
-                      <div
-                        key={t}
-                        className='rounded-md p-2 text-gray-100 border border-gray-400 bg-gray-500'>
+                    <div key={t} className='flex flex-col gap-1 mt-3 w-full'>
+                      <div className='flex gap-2 rounded-md p-2 text-gray-100 border border-gray-400 bg-gray-500'>
                         <label className='flex items-center space-x-3'>
                           <input
                             type='checkbox'
@@ -102,6 +100,9 @@ function App() {
                             {t}
                           </span>
                         </label>
+                        <button className='hover:text-danger transition-colors 0.2'>
+                          <TrashSimple size={32} />
+                        </button>
                       </div>
                     </div>
                   );
