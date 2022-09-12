@@ -23,5 +23,5 @@ module.exports = {
       danger: '#E25858',
     },
   },
-  plugins: [],
+  plugins: [require('@tailwindcss/forms')],
 };
