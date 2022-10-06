@@ -1,4 +1,5 @@
-import { ClipboardText, PlusCircle, TrashSimple } from 'phosphor-react';
+import { Check, ClipboardText, PlusCircle, TrashSimple } from 'phosphor-react';
+import * as CheckboxPrimitive from '@radix-ui/react-checkbox';
 import {
   ChangeEvent,
   FormEvent,
@@ -89,20 +90,17 @@ function App() {
                 tasks.map((t) => {
                   return (
                     <div key={t} className='flex flex-col gap-1 mt-3 w-full'>
-                      <div className='flex gap-2 rounded-md p-2 text-gray-100 border border-gray-400 bg-gray-500'>
-                        <label className='flex items-center space-x-3'>
-                          <input
-                            type='checkbox'
-                            name='checked-demo'
-                            className='bg-gray-400 border rounded-full w-5 h-5 checked:bg-purple focus:ring-0 focus:bg-purple-dark hover:bg-danger border-gray-300'
-                          />
-                          <span className='text-gray-100 dark:text-white font-normal break-words'>
-                            {t}
-                          </span>
+                      <div className='flex gap-2 rounded-md p-2 text-gray-100 border border-gray-400 bg-gray-500 items-center'>
+                        <CheckboxPrimitive.Root
+                          id='c1'
+                          className='flex bg-white w-6 h-6 rounded-full items-center justify-center shadow radix-state-checked:bg-purple hover:text-white'>
+                          <CheckboxPrimitive.Indicator className='text-purple radix-state-checked:text-gray-100'>
+                            <Check size={16} weight={'bold'} />
+                          </CheckboxPrimitive.Indicator>
+                        </CheckboxPrimitive.Root>
+                        <label htmlFor='c1' className='text-gray-100 w-full h-full cursor-pointer'>
+                          {t}
                         </label>
-                        <button className='hover:text-danger transition-colors 0.2'>
-                          <TrashSimple size={32} />
-                        </button>
                       </div>
                     </div>
                   );
