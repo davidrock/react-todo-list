@@ -124,7 +124,7 @@ function App() {
                     <>
                       <div className='flex justify-between gap-0 mb-3 w-full'>
                         <div
-                          className='flex gap-2 rounded-tl-md rounded-bl-md p-4 text-gray-100 border-y border-l cursor-pointer border-gray-400 bg-gray-500 items-center justify-between w-max'
+                          className='flex gap-2 rounded-tl-md rounded-bl-md p-4 text-gray-100 border-y border-l cursor-pointer border-gray-400 bg-gray-500 items-center justify-between w-full'
                           onClick={() => handleCompleteTask(t)}>
                           <div className='flex flex-row gap-3'>
                             <CheckboxPrimitive.Root
