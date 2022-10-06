@@ -1,4 +1,10 @@
-import { Check, ClipboardText, PlusCircle, TrashSimple } from 'phosphor-react';
+import {
+  Check,
+  ClipboardText,
+  PlusCircle,
+  Trash,
+  TrashSimple,
+} from 'phosphor-react';
 import * as CheckboxPrimitive from '@radix-ui/react-checkbox';
 import {
   ChangeEvent,
@@ -8,14 +14,27 @@ import {
   useState,
 } from 'react';
 import logotipo from './assets/logo.svg';
+import * as cx from 'classnames';
+
+interface Task {
+  id: number;
+  text: string;
+  completed: boolean;
+}
 
 function App() {
-  const [tasks, setTasks] = useState<string[]>([]);
-  const [newTask, setNewTask] = useState('');
+  const [tasks, setTasks] = useState<Task[]>([]);
+  const [newTask, setNewTask] = useState<string>('');
 
   function handleSubmit(event: FormEvent) {
     event.preventDefault();
-    setTasks([...tasks, newTask]);
+    const lastId = tasks[tasks.length - 1]?.id ?? 0;
+    const taskToBeCreated: Task = {
+      id: lastId + 1,
+      text: newTask,
+      completed: false,
+    };
+    setTasks([...tasks, taskToBeCreated]);
   }
 
   function handleNewTaskChange(event: ChangeEvent<HTMLInputElement>) {
@@ -25,6 +44,18 @@ function App() {
 
   function handleNewTaskInvalid(event: InvalidEvent<HTMLInputElement>) {
     event.target.setCustomValidity('You need to set a task name');
+  }
+
+  function handleCompleteTask(task: Task) {
+    task.completed = !task.completed;
+    const taskIndex = tasks.findIndex((x) => x.id === task.id);
+    const newTasksArray = [...tasks];
+    newTasksArray[taskIndex] = task;
+    setTasks(newTasksArray);
+  }
+
+  function handleDeteleTask(task: Task) {
+    setTasks((current) => current.filter((x) => x.id !== task.id));
   }
 
   return (
@@ -67,13 +98,13 @@ function App() {
                 <div className='text-blue font-bold'>
                   New tasks
                   <span className='ml-2 py-1 px-2 rounded-md bg-gray-400 text-gray-100'>
-                    0
+                    {tasks.length}
                   </span>
                 </div>
                 <div className='text-purple font-bold'>
                   Finished
                   <span className='ml-2 py-1 px-2 rounded-md bg-gray-400 text-gray-100'>
-                    0
+                    {tasks.filter((x) => x.completed).length}
                   </span>
                 </div>
               </div>
@@ -87,20 +118,36 @@ function App() {
               )}
 
               {tasks.length >= 0 &&
-                tasks.map((t) => {
+                tasks.map((t: Task) => {
                   return (
-                    <div key={t} className='flex flex-col gap-1 mt-3 w-full'>
-                      <div className='flex gap-2 rounded-md p-2 text-gray-100 border border-gray-400 bg-gray-500 items-center'>
-                        <CheckboxPrimitive.Root
-                          id='c1'
-                          className='flex bg-white w-6 h-6 rounded-full items-center justify-center shadow radix-state-checked:bg-purple hover:text-white'>
-                          <CheckboxPrimitive.Indicator className='text-purple radix-state-checked:text-gray-100'>
-                            <Check size={16} weight={'bold'} />
-                          </CheckboxPrimitive.Indicator>
-                        </CheckboxPrimitive.Root>
-                        <label htmlFor='c1' className='text-gray-100 w-full h-full cursor-pointer'>
-                          {t}
-                        </label>
+                    <div key={t.id} className='mb-3 w-full inline-block'>
+                      <div className='flex gap-2 rounded-md p-4 text-gray-100 border border-gray-400 bg-gray-500 items-center justify-between'>
+                        <div
+                          className='flex flex-row gap-3 cursor-pointer'
+                          onClick={() => handleCompleteTask(t)}>
+                          <CheckboxPrimitive.Root
+                            id='c1'
+                            checked={t.completed}
+                            className='flex bg-white w-6 h-6 rounded-full items-center justify-center shadow radix-state-checked:bg-purple hover:text-white'>
+                            <CheckboxPrimitive.Indicator className='text-purple radix-state-checked:text-gray-100'>
+                              <Check size={16} weight={'bold'} />
+                            </CheckboxPrimitive.Indicator>
+                          </CheckboxPrimitive.Root>
+                          <label
+                            htmlFor='c1'
+                            className={cx('text-gray-100 cursor-pointer', {
+                              'line-through': t.completed,
+                            })}>
+                            {t.text}
+                          </label>
+                        </div>
+
+                        <button className='hover:text-danger transition-colors 0.2'>
+                          <Trash
+                            size={25}
+                            onClick={() => handleDeteleTask(t)}
+                          />
+                        </button>
                       </div>
                     </div>
                   );
