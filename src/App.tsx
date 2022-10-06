@@ -15,8 +15,9 @@ import {
 } from 'react';
 import logotipo from './assets/logo.svg';
 import * as cx from 'classnames';
+import TaskList from './components/TaskList';
 
-interface Task {
+export interface Task {
   id: number;
   text: string;
   completed: boolean;
@@ -79,7 +80,7 @@ function App() {
                   autoComplete='off'
                   onChange={handleNewTaskChange}
                   onInvalid={handleNewTaskInvalid}
-                  className='bg-gray-400 text-gray-200 placeholder:text-gray-300 rounded-md border border-gray-700 pl-2 h-14 w-full active:outline focus-visible:outline outline-blue outline-2'
+                  className='bg-gray-400 text-gray-200 placeholder:text-gray-300 rounded-md border border-gray-700 pl-4 h-14 w-full active:outline focus-visible:outline outline-blue outline-2'
                   type='text'
                   placeholder='Create a new task'
                   required
@@ -110,50 +111,11 @@ function App() {
                 </div>
               </div>
 
-              {tasks.length <= 0 && (
-                <div className='flex flex-col justify-center items-center text-gray-300 border-t border-gray-400 rounded-md w-full pt-10'>
-                  <ClipboardText size={48} />
-                  <p className='mt-3'>You have no new tasks</p>
-                  <p>Create tasks and organize your things to do</p>
-                </div>
-              )}
-
-              {tasks.length >= 0 &&
-                tasks.map((t: Task) => {
-                  return (
-                    <>
-                      <div className='flex justify-between gap-0 mb-3 w-full'>
-                        <div
-                          className='flex gap-2 rounded-tl-md rounded-bl-md p-4 text-gray-100 border-y border-l cursor-pointer border-gray-400 bg-gray-500 items-center justify-between w-full'
-                          onClick={() => handleCompleteTask(t)}>
-                          <div className='flex flex-row gap-3'>
-                            <CheckboxPrimitive.Root
-                              id='c1'
-                              checked={t.completed}
-                              className='flex bg-white w-6 h-6 rounded-full items-center justify-center shadow radix-state-checked:bg-purple hover:text-white'>
-                              <CheckboxPrimitive.Indicator className='text-purple radix-state-checked:text-gray-100'>
-                                <Check size={16} weight={'bold'} />
-                              </CheckboxPrimitive.Indicator>
-                            </CheckboxPrimitive.Root>
-                            <span
-                              className={cx('text-gray-100 cursor-pointer text-ellipsis overflow-hidden', {
-                                'line-through': t.completed,
-                              })}>
-                              {t.text}
-                            </span>
-                          </div>
-                        </div>
-                        <div
-                          className='flex gap-2 rounded-tr-md rounded-br-md p-4 text-gray-100 border-y border-r border-gray-400 bg-gray-500 hover:bg-gray-600 hover:text-danger transition-colors 0.2 items-center justify-between cursor-pointer'
-                          onClick={() => handleDeteleTask(t)}>
-                          <button className=''>
-                            <Trash size={25} />
-                          </button>
-                        </div>
-                      </div>
-                    </>
-                  );
-                })}
+              <TaskList
+                tasks={tasks}
+                onCompleteTask={handleCompleteTask}
+                onDeleteTask={handleDeteleTask}
+              />
             </section>
           </div>
           <div className='h-14 col-span-2'></div>
