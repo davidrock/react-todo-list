@@ -35,6 +35,7 @@ function App() {
       completed: false,
     };
     setTasks([...tasks, taskToBeCreated]);
+    setNewTask('');
   }
 
   function handleNewTaskChange(event: ChangeEvent<HTMLInputElement>) {
@@ -120,36 +121,37 @@ function App() {
               {tasks.length >= 0 &&
                 tasks.map((t: Task) => {
                   return (
-                    <div key={t.id} className='mb-3 w-full inline-block'>
-                      <div className='flex gap-2 rounded-md p-4 text-gray-100 border border-gray-400 bg-gray-500 items-center justify-between'>
+                    <>
+                      <div className='flex justify-between gap-0 mb-3 w-full'>
                         <div
-                          className='flex flex-row gap-3 cursor-pointer'
+                          className='flex gap-2 rounded-tl-md rounded-bl-md p-4 text-gray-100 border-y border-l cursor-pointer border-gray-400 bg-gray-500 items-center justify-between w-max'
                           onClick={() => handleCompleteTask(t)}>
-                          <CheckboxPrimitive.Root
-                            id='c1'
-                            checked={t.completed}
-                            className='flex bg-white w-6 h-6 rounded-full items-center justify-center shadow radix-state-checked:bg-purple hover:text-white'>
-                            <CheckboxPrimitive.Indicator className='text-purple radix-state-checked:text-gray-100'>
-                              <Check size={16} weight={'bold'} />
-                            </CheckboxPrimitive.Indicator>
-                          </CheckboxPrimitive.Root>
-                          <label
-                            htmlFor='c1'
-                            className={cx('text-gray-100 cursor-pointer', {
-                              'line-through': t.completed,
-                            })}>
-                            {t.text}
-                          </label>
+                          <div className='flex flex-row gap-3'>
+                            <CheckboxPrimitive.Root
+                              id='c1'
+                              checked={t.completed}
+                              className='flex bg-white w-6 h-6 rounded-full items-center justify-center shadow radix-state-checked:bg-purple hover:text-white'>
+                              <CheckboxPrimitive.Indicator className='text-purple radix-state-checked:text-gray-100'>
+                                <Check size={16} weight={'bold'} />
+                              </CheckboxPrimitive.Indicator>
+                            </CheckboxPrimitive.Root>
+                            <span
+                              className={cx('text-gray-100 cursor-pointer text-ellipsis overflow-hidden', {
+                                'line-through': t.completed,
+                              })}>
+                              {t.text}
+                            </span>
+                          </div>
                         </div>
-
-                        <button className='hover:text-danger transition-colors 0.2'>
-                          <Trash
-                            size={25}
-                            onClick={() => handleDeteleTask(t)}
-                          />
-                        </button>
+                        <div
+                          className='flex gap-2 rounded-tr-md rounded-br-md p-4 text-gray-100 border-y border-r border-gray-400 bg-gray-500 hover:bg-gray-600 hover:text-danger transition-colors 0.2 items-center justify-between cursor-pointer'
+                          onClick={() => handleDeteleTask(t)}>
+                          <button className=''>
+                            <Trash size={25} />
+                          </button>
+                        </div>
                       </div>
-                    </div>
+                    </>
                   );
                 })}
             </section>
