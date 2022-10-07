@@ -14,6 +14,6 @@ A simple TODO list built with React, Typescript, Vite and Tailwindcss, built for
 
 ## Demo
 
-You can check live: [https://vercel.com/davidrock/react-todo-list](https://vercel.com/davidrock/react-todo-list)  
+You can check live: [https://vercel.com/davidrock/react-todo-list](https://rock-todo-app.vercel.app/)  
 
 ![Little demonstration](demo.gif)
