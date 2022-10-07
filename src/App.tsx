@@ -51,7 +51,7 @@ function App() {
         <img src={logotipo} alt='Logotipo' className='mx-auto' />
       </div>
 
-      <div className='container mx-auto px-48'>
+      <div className='container mx-auto px-6 lg:px-32'>
         <div className='w-full h-14 col-span-8'>
           <form onSubmit={handleSubmit}>
             <section
@@ -72,7 +72,7 @@ function App() {
               <button
                 type='submit'
                 className='w-30 py-2 px-4 flex justify-center items-center gap-2 rounded-md bg-blue hover:bg-blue-dark text-gray-100 active:outline focus-visible:outline outline-blue outline-2 transition ease-in duration-200 text-center text-base font-semibold'>
-                <span>Create</span>
+                <span className='hidden lg:block'>Create</span>
                 <PlusCircle size={23} />
               </button>
             </section>

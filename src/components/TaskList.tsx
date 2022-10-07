@@ -40,9 +40,8 @@ export default function TaskList({
                   onClick={() => onCompleteTask(t)}>
                   <div className='flex flex-row gap-3'>
                     <CheckboxPrimitive.Root
-                      id='c1'
                       checked={t.completed}
-                      className='flex bg-white w-6 h-6 rounded-full items-center justify-center shadow radix-state-checked:bg-purple hover:text-white'>
+                      className='flex bg-white radix-state-unchecked:border-purple radix-state-unchecked:outline-purple radix-state-unchecked:border-2 w-6 h-6 rounded-full items-center justify-center shadow radix-state-checked:bg-purple-dark hover:text-white'>
                       <CheckboxPrimitive.Indicator className='text-purple radix-state-checked:text-gray-100'>
                         <Check size={16} weight={'bold'} />
                       </CheckboxPrimitive.Indicator>
@@ -51,7 +50,7 @@ export default function TaskList({
                       className={cx(
                         'text-gray-100 cursor-pointer text-ellipsis overflow-hidden',
                         {
-                          'line-through': t.completed,
+                          'line-through text-gray-300': t.completed,
                         }
                       )}>
                       {t.text}
